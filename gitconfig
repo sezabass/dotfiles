@@ -1,0 +1,36 @@
+[core]
+    editor = "vim -c 'set textwidth=72'"
+[merge]
+    tool = vimdiff
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    stat = status
+    unstage = reset HEAD --
+    sdiff = diff --cached
+    pull = pull --rebase
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	praise = blame
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+[color "branch"]
+    current = yellow
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow
+    frag = magenta
+    old = red
+    new = green
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[branch]
+    autosetuprebase = always
+[merge]
+    conflictstyle = diff3

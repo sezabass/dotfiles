@@ -16,7 +16,8 @@ function fuse() {
 
 # Open GIT modified files
 function backtowork() {
-    local FILES=`git status --porcelain | awk '{print $2}' | xargs`
+    #local FILES=`git status --porcelain | awk '{print $2}' | xargs`
+    local FILES=`git status --porcelain | grep -Po '[^\s]+$' | xargs`
     if [ -n "$FILES" ] ; then
         vim -p $FILES
     else

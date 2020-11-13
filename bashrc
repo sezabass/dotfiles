@@ -1,18 +1,5 @@
-#clear genymotion cache files and restart VirtualBox
-alias fixgenymotion='sudo /Library/StartupItems/VirtualBox/VirtualBox restart'
-
 #flush dns
-alias reload='dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
-
-function fuse() {
-	local SERVER="dev01c6"
-	local USER="ccastro"
-	local VOLUME="/Volumes/${SERVER}"
-	diskutil unmount force /Volumes/dev01c6
-	#umount $VOLUME 
-	mkdir -p $VOLUME
-	sshfs -o auto_cache,reconnect,workaround=all ${USER}@${SERVER}.srv.office:/home/${USER}/ $VOLUME
-}
+alias flushdns='dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
 
 # Open GIT modified files
 function backtowork() {
@@ -29,3 +16,12 @@ function backtowork() {
 function gitshowtags() {
     git log --tags --simplify-by-decoration --pretty="format:%ai %d" | grep tag | less
 }
+
+# Rename Git remote branch on origin
+git-rename-remote-branch() {
+	currentbranch="$(git branch --show-current)" # not the best method for scripting
+	git branch -m $1
+	git push origin :$currentbranch $1
+	git push origin -u $1
+}
+
